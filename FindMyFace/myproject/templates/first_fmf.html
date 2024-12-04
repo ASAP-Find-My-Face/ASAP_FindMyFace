@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+ASAP - First FMF
+{% endblock %}
+
+{% block content %}
+<header class="main-header">
+    <h1>ASAP</h1>
+    <h2>FIND MY FACE</h2>
+    <p>Welcome to FIND MY FACE!</p>
+</header>
+<div class="fmf-container">
+    <p>Have you used our service before?</p>
+        <div class="button-group">
+            <button onclick="window.location.href='/find-my-face/'" class="fmf-button">I'm new here</button>
+            <button onclick="window.location.href='/video_platform/match/form'" class="fmf-button">I've used it before</button>
+        </div>
+</div>
+{% endblock %}

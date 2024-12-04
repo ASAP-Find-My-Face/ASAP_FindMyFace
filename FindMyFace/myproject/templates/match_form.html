@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Video Matching</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f4f4f4;
+            text-align: left;
+        }
+    </style>
+    <script>
+        let isMatching = false;
+
+        async function startMatching() {
+            // 중복 매칭 방지
+            if (isMatching) {
+                alert('Matching is already in progress.');
+                return;
+            }
+
+            // 입력값 확인
+            const key = document.getElementById('key').value.trim();
+            if (!key) {
+                alert('Please enter a valid face key.');
+                return;
+            }
+
+            // 매칭 상태 업데이트
+            const statusDiv = document.getElementById('match-status');
+            statusDiv.innerHTML = '<p>Matching in progress...</p>';
+            isMatching = true;
+
+            try {
+                // CSRF 토큰 가져오기
+                const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+                // API 요청
+                const response = await fetch('/video_platform/match/json/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken, // CSRF 토큰 추가
+                    },
+                    body: JSON.stringify({ key: key }) // 요청 데이터
+                });
+
+                // 응답 확인
+                if (!response.ok) {
+                    throw new Error(`HTTP error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                if (data.error) {
+                    statusDiv.innerHTML = `<p style="color:red;">Error: ${data.error}</p>`;
+                } else {
+                    updateResults(data.matched_videos);
+                }
+            } catch (error) {
+                // 에러 처리
+                statusDiv.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
+            } finally {
+                isMatching = false; // 매칭 상태 초기화
+            }
+        }
+        function updateResults(matchedVideos) {
+            const statusDiv = document.getElementById('match-status');
+            if (!matchedVideos || matchedVideos.length === 0) {
+                statusDiv.innerHTML = '<p>No matches found yet. Keep waiting...</p>';
+                return;
+            }
+    
+            // 매칭 결과 테이블 생성
+            let resultHTML = `
+                <table>
+                    <tr>
+                        <th>Video Name</th>
+                        <th>Match Time (Seconds)</th>
+                        <th>Match Similarity (%)</th>
+                        <th>Matched Frame</th>
+                    </tr>`;
+            matchedVideos.forEach(video => {
+                resultHTML += `
+                    <tr>
+                        <td>${video.video_name}</td>
+                        <td>${video.first_match_time.toFixed(2)}</td>
+                        <td>${(video.match_similarity * 100).toFixed(2)}%</td>
+                        <td>
+                            <img src="${video.frame_image_url}" alt="Matched Frame" style="max-width: 200px; max-height: 150px;">
+                        </td>
+                    </tr>`;
+            });
+            resultHTML += '</table>';
+            statusDiv.innerHTML = resultHTML;
+        }
+    </script>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo-container">
+            <img src="{% static 'images/asaplog (1).png' %}" alt="ASAP Logo" class="logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">🏠 HOME</a></li>
+                <hr class="nav-divider">
+                <li><a href="{% url 'first-fmf' %}">🔍 FIND MY FACE</a></li>
+                <hr class="nav-divider">
+                <li><a href="{% url 'upload-video-html' %}">📤 UPLOAD</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+
+    <main>
+        <header class="main-header">
+            <h1>ASAP</h1>
+            <h2>Real-Time Video Matching</h2>
+            <P>Insert the generated key value to find the video!</p>
+        </header>
+        {% block content %}
+        <!-- 매칭 키 입력 폼 -->
+        <div class="register-container">
+            <form onsubmit="event.preventDefault(); startMatching();" method="post">
+                {% csrf_token %}
+                <label for="key">Enter Face Key:</label>
+                <input type="text" id="key" name="key" required>
+                <br><br>
+                <button type="submit">Match</button>
+            </form>
+        </div>
+        <!-- 페이지 내용이 들어갑니다 -->
+        <!-- 매칭 상태 및 결과 출력 -->
+        <div id="match-status" style="margin-top: 20px;">
+            <!-- 실시간 매칭 결과 -->
+        </div>
+        {% endblock %}
+    </main>
+</body>
+</html>

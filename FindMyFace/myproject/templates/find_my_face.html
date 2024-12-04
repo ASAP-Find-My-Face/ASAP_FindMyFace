@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}
+Find My Face - ASAP
+{% endblock %}
+
+{% block content %}
+<header class="main-header">
+    <h1>ASAP</h1>
+    <h2>FIND MY FACE</h2>
+</header>
+<div class="content-container">
+    <section class="intro-section">
+        <h3>서비스 소개</h3>
+        <p>
+            저희 “FIND MY FACE” 서비스는 영상 플랫폼에서 나도 모르게 돌아다니고 있는 영상 속에서 내가 나온 영상이 무엇인지 찾아줍니다.
+        </p>
+        <p>
+            나도 모르게 나온 내 얼굴이 나온 영상 궁금하지 않나요?<br>
+            혹은, 내 얼굴이 어디선가 돌아다니고 있는지 걱정되지 않나요?
+        </p>
+        <p>
+            내 얼굴이 나온 영상을 찾고 싶은데 영상 이름이 기억이 나지 않아<br>
+            찾지 못하고 있다면,
+        </p>
+        <p>
+            저희가 해결해 드리겠습니다 :)
+        </p>
+    </section>
+    <section class="instructions-section">
+        <h3>이용 방법</h3>
+        <ol>
+            <li>자신의 눈코입이 모두 잘 나온 사진 10장을 넣는다.</li>
+            <li>인증코드를 받는다.</li>
+            <li>영상 공유 플랫폼의 “FIND MY FACE” 탭에서 인증코드를 통해 실시간으로 결과를 확인하실 수 있습니다.</li>
+            <li>결과는 3일동안 확인 할 수 있으며, 인증코드를 받은 시간을 기준으로 결과를 보여줍니다.</li>
+            <li>72시간 이후에는 인증코드가 적용되지 않으며, 사용한 이메일과 사진 모두 파기됩니다.</li>
+        </ol>
+    </section>
+    <section class="notice-section">
+        <h3>주의사항</h3>
+        <ul>
+            <li>염색, 앞머리 유무 등 머리스타일, 표정 변화가 있는 다양한 사진을 넣을 수록 정확도가 올라갑니다.</li>
+            <li>인증코드는 이메일 당 하나만 생성할 수 있으며, 인증코드가 만료된 후, 즉 72시간 후에는 새로운 얼굴 등록과 인증코드를 생성할 수 있습니다.</li>
+        </ul>
+    </section>
+    <div class="button-container">
+        <button onclick="window.location.href='/privacy_policy/'">NEXT</button>
+    </div>
+</div>
+{% endblock %}

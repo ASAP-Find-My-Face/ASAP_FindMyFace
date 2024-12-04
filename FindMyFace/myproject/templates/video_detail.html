@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ video_name }} - ASAP
+{% endblock %}
+
+{% block content %}
+<header class="main-header">
+    <h1>ASAP</h1>
+    <h2>{{ video_name }}</h2>
+</header>
+
+<div class="video-detail-container">
+    <!-- 영상 중앙 정렬 -->
+    <div class="video-wrapper">
+        <video width="800" height="450" controls>
+            <source src="{{ video_url }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- 버튼 -->
+    <div class="button-wrapper">
+        <a href="{% url 'home' %}" class="btn">Back to Video List</a>
+    </div>
+
+
+{% endblock %}

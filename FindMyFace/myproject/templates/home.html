@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+Video List - ASAP
+{% endblock %}
+
+{% block content %}
+<header class="main-header">
+    <h1>ASAP</h1>
+    <h2>VIDEO PLATFORM</h2>
+    <p>You can watch video here.</p>
+</header>
+
+<!-- 회색 박스 -->
+<div class="video-list-container">
+    <ul class="video-grid">
+        {% for video in videos %}
+        <li>
+            <!-- 파일 이름을 기반으로 URL 생성 -->
+            <a href="{% url 'video_detail' video.video_name %}">
+                <video width="300" height="200" controls>
+                    <source src="{{ video.file_path }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </a>
+            <p>{{ video.video_name }}</p>
+        </li>
+        {% empty %}
+        <p>No videos available.</p>
+        {% endfor %}
+    </ul>
+</div>
+
+
+{% endblock %}

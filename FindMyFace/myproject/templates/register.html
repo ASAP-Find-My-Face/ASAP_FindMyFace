@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+Register - ASAP
+{% endblock %}
+
+{% block content %}
+<header class="main-header">
+    <h1>ASAP</h1>
+    <h2>REGISTER</h2>
+    <p>Join us to find your face in videos!</p>
+</header>
+
+<div class="register-container">
+    <form action="/accounts/register/" method="post" class="register-form">
+        {% csrf_token %}
+        <input type="email" name="email" placeholder="Enter your email" required>
+        <button type="submit">Sign Up</button>
+    </form>
+</div>
+{% endblock %}

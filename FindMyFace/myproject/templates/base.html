@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ASAP FIND MY FACE{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- 공통 네비게이션 바 -->
+    <aside class="sidebar">
+        <div class="logo-container">
+            <img src="{% static 'images/asaplog (1).png' %}" alt="ASAP Logo" class="logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">🏠 HOME</a></li>
+                <hr class="nav-divider">
+                <li><a href="{% url 'first-fmf' %}">🔍 FIND MY FACE</a></li>
+                <hr class="nav-divider">
+                <li><a href="{% url 'upload-video-html' %}">📤 UPLOAD</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+
+    <!-- 페이지별 컨텐츠 -->
+    <main>
+
+        {% block content %}
+        <!-- 페이지 내용이 들어갑니다 -->
+        {% endblock %}
+    </main>
+</body>
+</html>

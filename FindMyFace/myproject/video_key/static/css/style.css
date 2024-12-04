@@ -1,0 +1,426 @@
+/* 기본 스타일 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex; /* Flexbox를 사용 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: flex-start; /* 세로 시작 위치 */
+    min-height: 100vh; /* 창 높이를 최소로 설정 */
+    box-sizing: border-box; /* 패딩 포함 크기 계산 */
+}
+
+/* 중앙 헤더 */
+main {
+    margin-left: 220px; /* 네비게이션 바 너비 */
+    margin-top: 120px;
+    display: flex;
+    align-items: center; /* 수직 중앙 정렬 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    min-height: calc(100vh - 50px); /* 헤더를 제외한 영역 높이 */
+    padding: 20px;
+    flex-direction: column; /* 콘텐츠를 세로 정렬 */
+}
+
+/* main-header 스타일 */
+.main-header {
+    position: absolute; /* 위치를 고정 */
+    top: 20px; /* 위에서 20px 떨어짐 */
+    left: 220px; /* 네비게이션 바의 너비만큼 왼쪽 여백 */
+    right: 20px; /* 오른쪽에서 약간의 여백 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    color: #333;
+    width: calc(100% - 220px); /* 화면 너비에서 네비게이션 바 너비를 제외 */
+    margin: 0 auto; /* 중앙 정렬 */
+}
+
+/* 제목 스타일 */
+.main-header h1 {
+    font-size: 32px;
+    color: #4A90E2;
+    margin: 0;
+}
+
+.main-header h2 {
+    font-size: 32px;
+    margin: 10px 0;
+    color: #333;
+}
+
+
+
+
+/* 네비게이션 바 스타일 */
+.sidebar {
+    width: 200px;
+    background-color: #eaeaea;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.sidebar nav ul li {
+    margin: 20px 0;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    display: inline-block;
+}
+
+.sidebar nav ul li a:hover {
+    color: #4A90E2;
+}
+
+.nav-divider {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+/* 로고 스타일 */
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 80%;
+    height: auto;
+    display: inline-block;
+}
+
+/* findmyface.html 컨테이너 */
+.content-container {
+    text-align: center;
+    padding: 20px;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto; /* 중앙 정렬 */
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* 섹션 스타일 */
+.intro-section, .instructions-section, .notice-section {
+    margin: 20px 0;
+    text-align: left;
+}
+
+
+.content-container h2 {
+    font-size: 28px;
+    color: #4A90E2;
+    margin-bottom: 20px;
+}
+
+
+/* 섹션 제목 */
+.content-container h3 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #4A90E2;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* 본문 텍스트 */
+.content-container p, .content-container ol, .content-container ul {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+/* 리스트 스타일 */
+.content-container ol {
+    padding-left: 20px;
+}
+
+.content-container ol li, .content-container ul li {
+    margin: 10px 0;
+}
+
+/* 버튼 스타일 */
+.button-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.button-container button {
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-container button:hover {
+    background-color: #357ABD;
+}
+
+
+.upload-container, .list-container {
+    text-align: center;
+    margin: auto;
+    padding: 80px;
+    max-width: 800px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.upload-container h2, .list-container h2 {
+    font-size: 24px;
+    color: #4A90E2;
+    margin-bottom: 20px;
+}
+
+.drag-area {
+    border: 2px dashed #4A90E2;
+    padding: 40px; /* 내부 여백 증가 */
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+    cursor: pointer;
+    width: 80%; /* 전체 폭 사용 */
+    max-width: 800px; /* 최대 폭 설정 */
+    min-height: 200px; /* 최소 높이 증가 */
+}
+
+.drag-area:hover {
+    background-color: #f0f0f0;
+}
+
+.drag-area span {
+    font-size: 36px;
+    color: #4A90E2;
+}
+
+.drag-area p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+.upload-link {
+    color: #4A90E2;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.button-group {
+    margin-top: 15px;
+}
+
+.cancel-button, .upload-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.cancel-button {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.upload-button {
+    background-color: #4A90E2;
+    color: #fff;
+}
+
+.cancel-button:hover {
+    background-color: #d6d6d6;
+}
+
+.upload-button:hover {
+    background-color: #357ABD;
+}
+
+/* 비디오 리스트를 감싸는 전체 컨테이너 */
+.video-list-container {
+    text-align: center;
+    margin: 20px auto; /* 위아래 여백 추가 및 중앙 정렬 */
+    padding: 400px;
+    width: 100%; /* 창 폭의 90%로 설정 (기존보다 더 넓게 설정) */
+    max-width: 1200px; /* 최대 가로 폭 제한 */
+    min-height: 70vh; /* 창 높이의 80% 사용 */
+    background-color: #f9f9f9; /* 회색 박스 색상 */
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* 세로 스크롤 활성화 */
+    display: flex; /* Flexbox로 중앙 정렬 */
+    flex-direction: column;
+    box-sizing: border-box; /* 패딩 포함 크기 계산 */
+}
+
+
+/* 비디오 그리드 */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 한 줄에 3개씩 */
+    gap: 20px; /* 카드 간격 */
+    list-style: none;
+    padding: 0;
+    margin: 0 auto; /* 중앙 정렬 */
+    width: 100%; /* 부모 컨테이너 가득 채움 */
+}
+
+/* 비디오 카드 */
+.video-grid li {
+    background-color: #ffffff; /* 흰색 배경 */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    padding: 10px;
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.video-grid li:hover {
+    transform: scale(1.05); /* 호버 시 확대 효과 */
+}
+
+/* 비디오 썸네일 */
+.video-grid li img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* 비디오 제목 */
+.video-grid li p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Register Page Styles */
+/* Register Page Styles */
+/* Register Page Styles */
+.register-container {
+    text-align: center;
+    margin: auto;
+    padding: 40px;
+    max-width: 600px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px; /* 컨테이너를 상단에서 조금 더 내림 */
+    box-sizing: border-box;
+}
+
+/* Form 내부 텍스트 스타일 */
+.register-container p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+/* Form 내부의 입력 필드 */
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.register-form input[type="email"] {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.register-form input[type="email"]:focus {
+    border-color: #4A90E2;
+    outline: none;
+}
+
+/* 버튼 스타일 */
+.register-form button {
+    background-color: #4A90E2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    max-width: 200px;
+}
+
+.register-form button:hover {
+    background-color: #357ABD;
+}
+
+/* First FMF Page Styles */
+.fmf-container {
+    text-align: center;
+    margin: auto;
+    padding: 40px;
+    max-width: 600px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px; /* 상단 헤더와 간격 */
+    box-sizing: border-box;
+}
+
+.fmf-container p {
+    font-size: 20px;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+/* 버튼 스타일 */
+.button-group {
+    display: flex;
+    flex-direction: column; /* 버튼을 위아래로 배치 */
+    justify-content: center;
+    align-items: center; /* 가운데 정렬 */
+    gap: 10px; /* 버튼 간격 */
+}
+
+.fmf-button {
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.fmf-button:hover {
+    background-color: #357ABD;
+}

@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}
+Test Generate Key API - ASAP
+{% endblock %}
+
+{% block content %}
+<header class="main-header">
+    <h1>ASAP</h1>
+    <h2>Generate Key</h2>
+    <p>Upload your images to generate a unique key!</p>
+</header>
+
+<div class="upload-container">
+    <form action="/face_search/create-face-key/" method="POST" enctype="multipart/form-data" onsubmit="uploadImages(event)" class="upload-form">
+        {% csrf_token %}
+        <!-- 드래그 앤 드롭 영역 -->
+        <div class="drag-area">
+            <label for="images">
+                <span class="upload-icon">📷</span>
+                <p>Drag images to upload.</p>
+                <p>or <span class="upload-link">upload here.</span></p>
+            </label>
+            <input type="file" id="images" name="images" multiple required hidden>
+        </div>
+        <!-- 버튼 -->
+        <div class="button-group">
+            <button type="button" class="cancel-button">Cancel</button>
+            <button type="submit" class="upload-button">Generate Key</button>
+        </div>
+    </form>
+    <!-- 로딩 메시지 -->
+    <p id="loading-message" style="display: none; color: blue;">Generating key... Please wait.</p>
+    <!-- 결과 메시지 -->
+    <div id="result-message"></div>
+</div>
+
+<script>
+    function uploadImages(event) {
+        event.preventDefault(); // 기본 폼 제출 동작 방지
+
+        const form = event.target;
+        const formData = new FormData(form);
+        const message = document.getElementById("loading-message");
+        const result = document.getElementById("result-message");
+        const startTime = Date.now(); // 처리 시작 시간 기록
+
+        // 로딩 메시지 표시
+        message.style.display = "block";
+        result.innerHTML = ""; // 결과 초기화
+
+        fetch(form.action, {
+            method: "POST",
+            body: formData,
+            headers: {
+                "X-CSRFToken": form.querySelector('[name="csrfmiddlewaretoken"]').value
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                const endTime = Date.now(); // 처리 종료 시간 기록
+                const duration = ((endTime - startTime) / 1000).toFixed(2); // 소요 시간 계산
+
+                if (data.key) {
+                    const fileNameWithoutExtension = data.key.split("\\").pop().replace(/\.pkl$/, "");
+
+                    result.innerHTML = `
+                        <p style="color: green;">Key generation successful!</p>
+                        <p>Generated Key: <strong>${fileNameWithoutExtension}</strong></p>
+                        <p>Processing time: <strong>${duration} seconds</strong></p>
+                    `;
+                } else {
+                    result.innerHTML = `<p style="color: red;">Error: ${data.error}</p>`;
+                }
+            })
+            .catch(error => {
+                result.innerHTML = `<p style="color: red;">An unexpected error occurred: ${error}</p>`;
+            })
+            .finally(() => {
+                message.style.display = "none"; // 로딩 메시지 숨김
+            });
+    }
+</script>
+{% endblock %}

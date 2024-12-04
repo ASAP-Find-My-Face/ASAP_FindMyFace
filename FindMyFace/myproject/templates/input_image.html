@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+ASAP - Input Images
+{% endblock %}
+
+{% block content %}
+<header class="main-header">
+    <h1>ASAP</h1>
+    <h2>INPUT IMAGE</h2>
+    <p>You should upload up to 10 images here.</p>
+</header>
+<div class="upload-container">
+    {% if success %}
+        <p class="success-message">{{ success }}</p>
+    {% endif %}
+    {% if error %}
+        <p class="error-message">{{ error }}</p>
+    {% endif %}
+    <form method="POST" enctype="multipart/form-data" action="{% url 'face_key:upload_images' %}">
+        {% csrf_token %}
+        <div class="drag-area">
+            <label for="image_files">
+                <span>🖼️</span>
+                <p>Drag images to upload.</p>
+                <p>or <span class="upload-link">upload here.</span></p>
+            </label>
+            <input type="file" id="image_files" name="images" accept="image/*" multiple required hidden>
+        </div>
+        <div class="button-group">
+            <button type="button" onclick="window.location.href='/accounts/register/'" class="cancel-button">Cancel</button>
+            <button type="submit" class="upload-button">UPLOAD</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

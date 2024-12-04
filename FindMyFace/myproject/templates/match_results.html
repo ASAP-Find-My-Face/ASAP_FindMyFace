@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Match Results</title>
+</head>
+<body>
+    <h1>Video Match Results</h1>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    {% if matched_videos %}
+        <p>Found matches in the following videos:</p>
+        <ul>
+            {% for video in matched_videos %}
+                <li>
+                    <strong>Video Name:</strong> {{ video.video_name }}<br>
+                    <strong>Matched Frames:</strong> {{ video.matched_frames }}<br>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No matches found.</p>
+    {% endif %}
+</body>
+</html>
