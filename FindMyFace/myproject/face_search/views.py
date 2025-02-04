@@ -6,12 +6,19 @@ import hashlib  #해싱 모듈
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.conf import settings
-from .models import FaceEncodingFile, VideoPlatformResult
 from django.views.decorators.csrf import csrf_exempt
 from io import BytesIO
 from PIL import Image
 import numpy as np
 import face_recognition
+
+#Django 앱에서 Video 모델 가져오기 (순환 참조 방지)
+from django.apps import apps
+Video = apps.get_model('video_platform', 'Video')
+
+# `FaceEncodingFile`, `VideoPlatformResult` 모델은 그대로 사용
+from .models import FaceEncodingFile, VideoPlatformResult
+
 
 def generate_key_test_page(request):
     """
@@ -31,7 +38,7 @@ def create_face_key(request):
 
         embeddings = []
         
-        # 🔹 SHA-256 해싱을 사용한 12자리 키 생성
+        #SHA-256 해싱을 사용한 12자리 키 생성
         user_email = request.POST.get('email', 'default@example.com')  # 사용자 이메일 받기 (없으면 기본값)
         raw_key = f"{user_email}{os.urandom(16).hex()}"  # 이메일 + 랜덤 16바이트 값 조합
         hashed_key = hashlib.sha256(raw_key.encode()).hexdigest()[:12]  # SHA-256 해싱 후 앞 12자리 추출

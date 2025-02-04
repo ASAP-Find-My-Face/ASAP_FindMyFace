@@ -1,0 +1,16 @@
+# SQLite DB 파일 제외
+db.sqlite3
+
+# 캐시 파일 및 컴파일된 파이썬 파일 제외
+__pycache__/
+*.pyc
+
+# 미디어 파일(업로드된 영상, 얼굴 데이터) 제외
+media/
+
+# Django 정적 파일(staticfiles/) 제외
+staticfiles/
+
+# 가상환경 폴더 제외
+pblenv/
+venv/

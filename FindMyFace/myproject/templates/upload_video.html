@@ -9,13 +9,13 @@ Upload Video - ASAP
     <h1>ASAP</h1>
     <h2>VIDEO UPLOAD</h2>
     <p>You can upload videos here.</p>
-    <p></p>
 </header>
 
 <div class="upload-container">
     <!-- 업로드 폼 -->
     <form method="POST" enctype="multipart/form-data" action="{% url 'upload-video' %}">
         {% csrf_token %}
+        
         <!-- Drag-and-Drop Area -->
         <div class="drag-area">
             <label for="video_file">
@@ -23,12 +23,17 @@ Upload Video - ASAP
                 <p>Drag videos to upload.</p>
                 <p>or <span class="upload-link">upload here.</span></p>
             </label>
-            <input type="file" id="video_file" name="file_path" accept="video/*" hidden>
+            <input type="file" id="video_file" name="video_file" accept="video/*" hidden required>
         </div>
-        
+
         <!-- 비디오 이름 입력 -->
         <input type="text" name="video_name" placeholder="Enter video name" required>
         
+        <!-- 오류 메시지 표시 -->
+        {% if error_message %}
+        <p class="error-message">{{ error_message }}</p>
+        {% endif %}
+
         <!-- 버튼 그룹 -->
         <div class="button-group">
             <button type="button" onclick="window.location.href='{% url 'home' %}'" class="cancel-button">Cancel</button>
